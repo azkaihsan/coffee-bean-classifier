@@ -15,7 +15,7 @@ The system is designed for on-device inference on an NVIDIA Jetson Nano, whose G
 
 ---
 
-## 1. Project Highlights
+## Project Highlights
 * Hierarchical CNN with three heads  
   – Binary head: Normal / Defect  
   – Roast-colour head (only if Normal)  
@@ -27,7 +27,7 @@ The system is designed for on-device inference on an NVIDIA Jetson Nano, whose G
 
 ---
 
-## 2. Folder Structure
+## Folder Structure
 ```
 .
 ├── dataset/
@@ -111,7 +111,7 @@ docker run -p 5000:5000 coffee-classifier
 
 ---
 
-## 3. Installation (bare-metal)
+## Installation (bare-metal)
 ```bash
 python -m venv venv
 source venv/bin/activate
@@ -120,7 +120,7 @@ pip install torch torchvision scikit-learn flask pillow
 
 ---
 
-## 4. Training
+## Training
 ```bash
 python train_eval.py
 ```
@@ -128,7 +128,7 @@ The script prints per-epoch metrics and stores the best checkpoint in `weights/b
 
 ---
 
-## 5. Running the API
+## Running the API
 ```bash
 python app.py               # default port 5000
 curl -F "file=@bean.jpg" http://localhost:5000/classify/
@@ -136,12 +136,35 @@ curl -F "file=@bean.jpg" http://localhost:5000/classify/
 Sample response
 ```json
 {
-  "normal": 0.87,
-  "defect": 0.13,
-  "probabilities": {
-    "roast":  { "green":0.02, "light":0.55, "medium":0.28, "dark":0.15 },
-    "defect": { "full_black":0.05, "dead":0.03, "fungus":0.02, "insect":0.03 }
-  }
+    "defect": 0.9708747267723083,
+    "normal": 0.029125330969691277,
+    "probabilities": {
+        "defect": {
+            "Broken": 0.014931626617908478,
+            "Cut": 0.058523692190647125,
+            "Dry Cherry": 0.04974476620554924,
+            "Fade": 0.002516777953132987,
+            "Floater": 0.0012433113297447562,
+            "Full Black": 0.11897987872362137,
+            "Full Sour": 0.004585465416312218,
+            "Fungus Damange": 0.008331590332090855,
+            "Husk": 0.6956599354743958,
+            "Immature": 0.0030171566177159548,
+            "Parchment": 0.0011289638932794333,
+            "Partial Black": 0.020398804917931557,
+            "Partial Sour": 0.0017897349316626787,
+            "Severe Insect Damange": 0.0035117401275783777,
+            "Shell": 0.002051882678642869,
+            "Slight Insect Damage": 0.005499531049281359,
+            "Withered": 0.008085156790912151
+        },
+        "roast": {
+            "Dark (Over Roasted)": 0.644023597240448,
+            "Green (Not Roasted)": 0.06097421422600746,
+            "Light (Under Roasted)": 0.07394636422395706,
+            "Medium (Well Roasted)": 0.22105593979358673
+        }
+    }
 }
 ```
 
@@ -160,7 +183,7 @@ Sample response
 ---
 
 ## License
-MIT License – see `LICENSE` file for details.
+MIT License – see `MIT LICENSE` tab for details.
 
 ---
 
